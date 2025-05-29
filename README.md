@@ -13,3 +13,7 @@ Just the course schedule:
 
 Courseera 
   - https://www.coursera.org/learn/advanced-rust-programming#modules
+
+Creating Diagrams:
+- LucidChart: https://www.lucidchart.com/pages
+- Platuml: https://plantuml.com/
