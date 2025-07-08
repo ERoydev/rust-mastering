@@ -17,3 +17,7 @@ Courseera
 Creating Diagrams:
 - LucidChart: https://www.lucidchart.com/pages
 - Platuml: https://plantuml.com/
+
+
+Solana related:
+- Solana Security Workshop 3h: https://workshop.neodyme.io/workshop.html
