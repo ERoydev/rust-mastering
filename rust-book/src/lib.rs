@@ -6,3 +6,5 @@ pub use smart_pointers::ref_counting_rc::ref_counting_rc;
 pub use smart_pointers::interior_mutability;
 pub use smart_pointers::reference_cycles;
 pub use smart_pointers::TreeDataStructure;
+
+mod macros;
