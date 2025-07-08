@@ -21,3 +21,4 @@ Creating Diagrams:
 
 Solana related:
 - Solana Security Workshop 3h: https://workshop.neodyme.io/workshop.html
+- Solana developer: https://solana.com/developers
