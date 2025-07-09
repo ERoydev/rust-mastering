@@ -1,5 +1,5 @@
 Some good sources of advanced Rust knowledge include:
-  - https://doc.rust-lang.org/nomicon/
+  - Rustnomicon Advanced unsafe Rust: https://doc.rust-lang.org/nomicon/
   - Rust macros Book (Old): https://veykril.github.io/tlborm/
   - Rust Macros Book: https://danielkeep.github.io/tlborm/book/index.html
   - Original Rust Book: https://doc.rust-lang.org/reference/
