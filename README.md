@@ -25,6 +25,7 @@
 ## Solana related:
 - Solana Security Workshop 3h: https://workshop.neodyme.io/workshop.html
 - Solana developer good resources to learn: https://solana.com/developers
+- Good explanation for PDA's: https://www.youtube.com/watch?v=ZwFNPvqUclM
 
 ## Blockchain Related materials:
 - Uniswap Dex: https://docs.uniswap.org/contracts/v2/guides/smart-contract-integration/providing-liquidity#introduction
