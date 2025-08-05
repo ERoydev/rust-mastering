@@ -5,6 +5,7 @@
   - Rust Macros Book: https://danielkeep.github.io/tlborm/book/index.html
   - Original Rust Book: https://doc.rust-lang.org/reference/
   - Paper Book: https://www.manning.com/books/write-powerful-rust-macros
+  - Rust Toolchain: https://rust-lang.github.io/rustup/overrides.html
 
 ## Video resources:
   - Crust of Rust: https://www.youtube.com/playlist?list=PLqbS7AVVErFiWDOAVrPt7aYmnuuOLYvOa
