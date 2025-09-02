@@ -10,7 +10,8 @@
 ## Suggested resources by Boris:
 - https://www.oreilly.com/library/view/programming-rust-2nd/9781492052586/ -> good to read
 - https://marabos.nl/atomics/ -> masterpiece(must read)
--  How Linux Works -> https://stcformation.com/wp-content/uploads/2023/10/How-Linux-Works-What-Every-Superuser-Should-Know.pdf -> MUST READ 
+- How Linux Works(latest edition) -> MUST READ
+- eBPF -> https://ebpf.io/what-is-ebpf/  
 
 ## Video resources:
   - Crust of Rust: https://www.youtube.com/playlist?list=PLqbS7AVVErFiWDOAVrPt7aYmnuuOLYvOa
