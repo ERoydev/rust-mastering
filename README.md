@@ -1,11 +1,16 @@
 
-## Books
+## Books:
   - Rustnomicon Advanced unsafe Rust: https://doc.rust-lang.org/nomicon/
   - Rust macros Book (Old): https://veykril.github.io/tlborm/
   - Rust Macros Book: https://danielkeep.github.io/tlborm/book/index.html
   - Original Rust Book: https://doc.rust-lang.org/reference/
   - Paper Book: https://www.manning.com/books/write-powerful-rust-macros
   - Rust Toolchain: https://rust-lang.github.io/rustup/overrides.html
+
+## Suggested resources by Boris:
+- https://www.oreilly.com/library/view/programming-rust-2nd/9781492052586/ -> good to read
+- https://marabos.nl/atomics/ -> masterpiece(must read)
+-  How Linux Works -> https://stcformation.com/wp-content/uploads/2023/10/How-Linux-Works-What-Every-Superuser-Should-Know.pdf -> MUST READ 
 
 ## Video resources:
   - Crust of Rust: https://www.youtube.com/playlist?list=PLqbS7AVVErFiWDOAVrPt7aYmnuuOLYvOa
