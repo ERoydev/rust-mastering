@@ -39,6 +39,13 @@ The shell provides:
 - Combines **interactive** and **login** behaviors.
 - Reads **login configuration files** and accepts **user input**.
 
+### d. Shells can be categorized as
+- **Interactive Shells**: Accept user input from a terminal. Examples: running `bash` or `zsh` directly.  
+- **Non-Interactive Shells**: Run scripts without user interaction. Example: `bash script.sh`  
+- **Login Shells**: Read configuration files meant for login sessions (e.g., `.zprofile`, `.zlogin`).  
+- **Non-Login Shells**: Do not read login configuration files (usually for new terminals opened from an already logged-in session).
+
+
 ---
 
 ## 3. `zsh -il`
