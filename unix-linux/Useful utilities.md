@@ -8,7 +8,8 @@ Displays the raw contents of a file (or stream) in **hexadecimal and ASCII** for
 - To **check file headers or magic bytes** (identify unknown file types).  
 - To **debug or reverse-engineer** binary formats or network data.  
 - When analyzing **low-level data structures**, memory dumps, or disk images.  
-- To verify **exact byte values** in files (useful for developers or system programmers).  
+- To verify **exact byte values** in files (useful for developers or system programmers).
+- You can use it as a combination with `meld`, so when u have `hexdump` of two files you can compare them using meld
 
 **Typical command:**  
 ```bash
