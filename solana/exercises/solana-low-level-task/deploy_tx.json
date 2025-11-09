@@ -1,0 +1,118 @@
+{
+  "blockTime": 1762433287,
+  "meta": {
+    "computeUnitsConsumed": 2670,
+    "costUnits": 5334,
+    "err": null,
+    "fee": 10000,
+    "innerInstructions": [
+      {
+        "index": 1,
+        "instructions": [
+          {
+            "accounts": [
+              0,
+              3,
+              2
+            ],
+            "data": "11119owcfEnyBzmF5BiYnGJcWaYZ8NuBVw4L9YF4QgDHPARNBDWBrxSL3qYUey4ZcTz3NF",
+            "programIdIndex": 4,
+            "stackHeight": 2
+          }
+        ]
+      }
+    ],
+    "loadedAddresses": {
+      "readonly": [],
+      "writable": []
+    },
+    "logMessages": [
+      "Program 11111111111111111111111111111111 invoke [1]",
+      "Program 11111111111111111111111111111111 success",
+      "Program BPFLoaderUpgradeab1e11111111111111111111111 invoke [1]",
+      "Program 11111111111111111111111111111111 invoke [2]",
+      "Program 11111111111111111111111111111111 success",
+      "Deployed program 9eX2VoYXNnKbaS2HmhjgsLMpETTnvL9Tgjg2Wt6rGR1e",
+      "Program BPFLoaderUpgradeab1e11111111111111111111111 success"
+    ],
+    "postBalances": [
+      465883146519,
+      1141440,
+      0,
+      11282160,
+      1,
+      1,
+      1169280,
+      1009200
+    ],
+    "postTokenBalances": [],
+    "preBalances": [
+      465884297959,
+      0,
+      11282160,
+      0,
+      1,
+      1,
+      1169280,
+      1009200
+    ],
+    "preTokenBalances": [],
+    "rewards": [],
+    "status": {
+      "Ok": null
+    }
+  },
+  "slot": 419706236,
+  "transaction": {
+    "message": {
+      "header": {
+        "numReadonlySignedAccounts": 0,
+        "numReadonlyUnsignedAccounts": 4,
+        "numRequiredSignatures": 2
+      },
+      "accountKeys": [
+        "5sKBF5yF6hQXZExkUKHBSnW8UgiXwpvijDNakWPm4u15",
+        "9eX2VoYXNnKbaS2HmhjgsLMpETTnvL9Tgjg2Wt6rGR1e",
+        "7HnvqMdqzhH7PSZzrgqWNdymFMpjwL2NaSUbgCyF54c3",
+        "8imaZtPvymQpY4rbbbjitmh9rqT3LwhUykfbJ2fDUQra",
+        "11111111111111111111111111111111",
+        "BPFLoaderUpgradeab1e11111111111111111111111",
+        "SysvarC1ock11111111111111111111111111111111",
+        "SysvarRent111111111111111111111111111111111"
+      ],
+      "recentBlockhash": "2fySPesjaPaVuy8n25nsxfsJ982PuSRwsgjheiW3y99S",
+      "instructions": [
+        {
+          "accounts": [
+            0,
+            1
+          ],
+          "data": "111184NuZo7gmbjwda8fGAim94roEJcdbYKd7Gdtpi6CbBByeanCr8u4EAFXLjnY2U8bjD",
+          "programIdIndex": 4,
+          "stackHeight": 1
+        },
+        {
+          "accounts": [
+            0,
+            3,
+            1,
+            2,
+            7,
+            6,
+            4,
+            0
+          ],
+          "data": "3Bxs4UxfFDXZE8Yw",
+          "programIdIndex": 5,
+          "stackHeight": 1
+        }
+      ],
+      "indexToProgramIds": {}
+    },
+    "signatures": [
+      "4NvzarXU74xVtfCEvqnV2vtXfRpmN4h8jJ74HYue6ja654LbjQ9WTWfwAZi4QVscLdJjQyZSS5e95T94DpRPTfC7",
+      "26WMsn22UGDB275hFwnTJtNMCaFkbEgKuarGFnK5SSxeK2VEdbyj7eoamQwPx7tZuvZp2kfkcLEuizfZufUrcw3G"
+    ]
+  },
+  "version": "legacy"
+}
