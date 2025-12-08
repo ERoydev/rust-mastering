@@ -99,3 +99,39 @@ This document explains how **instruction data** in Solana programs is serialized
 
 - **Fixed-size → no length prefix**  
 - **Variable-size → 4-byte little-endian length prefix**  
+
+
+## 6. Using Borsh to automate this
+
+```rust
+// Define a Struct representing your input params
+#[derive(BorshSerialize, BorshDeserialize)]
+struct InitializeMintAccountArgs {
+    name: String,
+    symbol: String,
+    uri: String,
+    supply: u64,
+}
+
+// Then use it in your tests 
+
+// Params
+let name = "TestToken";
+let symbol = "TTK";
+let uri = "https://cdn-icons-png.flaticon.com/512/17978/17978725.png";
+let supply: u64 = 100000;
+
+// Instruction data consist of [Instruction_discriminator][serialized instruction data, in other words params]
+// Since i need every argument to have 4-byte length prefix for every dynamic arg i must use Borsh for simplification
+let args = InitializeMintAccountArgs {
+    name: name.to_string(),
+    symbol: symbol.to_string(),
+    uri: uri.to_string(),
+    supply,
+};
+
+// This is the full instruction data
+let mut instruction_data = discriminator;
+let args_bytes = borsh::to_vec(&args).expect("Failed to serialize args");
+instruction_data.extend_from_slice(&args_bytes); 
+```
