@@ -10,7 +10,7 @@ struct Node {
 }
 
 // Weak<T> is the version of `Rc` holding a non-owning ref to the managed allocation
-//      - that allocation is accessed by calling `.upgrade()` on the Weak pointer, returns `Option<Rc<T>>`
+//      - that allocation is accessed by calling `.upgrade()` on the Weak pointer, returns `Option<Rc<T>>` 
 
 pub fn tree() {
     let leaf = Rc::new(Node {
@@ -19,7 +19,6 @@ pub fn tree() {
         children: RefCell::new(vec![]),
     });
 
-    
     println!("leaf parent = {:?} ", leaf.parent.borrow().upgrade());
     
     let branch = Rc::new(Node {

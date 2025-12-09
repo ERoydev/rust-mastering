@@ -8,3 +8,5 @@ pub use smart_pointers::reference_cycles;
 pub use smart_pointers::TreeDataStructure;
 
 mod macros;
+
+mod traits;

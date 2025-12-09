@@ -24,7 +24,7 @@ use List::{Cons, Nil};
 pub fn ref_counting_rc() {
     let a = Rc::new(Cons(5, Rc::new(Cons(10, Rc::new(Nil)))));
     let b = Cons(3, Rc::clone(&a)); // clone to pass a into b and c => doesn't make deep copy of the data, only increments the reference count
-    // a.clone() would do the same since `a` is Rc initiliazed but current syntax is prefferred
+    // a.clone() would do the same since `a` is Rc initiliazed but current syntax is prefferr. ed
     let c = Cons(4, Rc::clone(&a));
 
 

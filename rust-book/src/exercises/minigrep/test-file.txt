@@ -1,0 +1,23 @@
+I'm nobody! Who are you?
+Are you nobody, too?
+Then there's a pair of us - don't tell!
+They'd banish us, you know.
+
+How dreary to be somebody!
+How public, like a frog
+To tell your name the livelong day
+To an admiring bog!
+
+This is a test file for the minigrep program.
+It contains various lines of text to search through.
+Some lines contain the word "nobody" which might be useful for testing.
+Other lines have different words like "frog" and "bog".
+The minigrep program should be able to search for any word in this file.
+
+Rust is a systems programming language that focuses on speed, memory safety, and parallelism.
+It achieves memory safety without garbage collection, making it a great choice for system-level programming.
+The ownership system in Rust prevents common bugs like null pointer dereferences and buffer overflows.
+
+Testing is an important part of software development.
+This file serves as a sample text for testing search functionality.
+You can search for words like "Rust", "memory", "safety", or any other term that appears in this text.

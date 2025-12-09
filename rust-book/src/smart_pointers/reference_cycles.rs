@@ -1,4 +1,4 @@
-
+ 
 // - With Rc<T>, RefCell<T> smart pointers => I can create references where items refer to each other in cycle.
 // This creates a memory leaks, because the references count of each item in the cycle will never reach 0, and the values will never be dropped.
 // https://doc.rust-lang.org/book/ch15-06-reference-cycles.html
@@ -9,7 +9,7 @@ use List::{Cons, Nil};
 use std::cell::RefCell;
 use std::rc::Rc;
 
-#[derive(Debug)]
+#[derive(Debug)] 
 enum List {
     Cons(i32, RefCell<Rc<List>>),
     Nil,

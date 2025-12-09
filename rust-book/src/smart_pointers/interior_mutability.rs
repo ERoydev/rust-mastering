@@ -79,6 +79,7 @@ mod tests {
         fn send(&self, message: &str) {
             // with .borrow_mut() i get mutable borrow on the inside while in the outside send is defined with immutable `self`
             let mut one_borrow = self.sent_messages.borrow_mut();
+
             // let mut two_borrow = self.sent_messages.borrow_mut(); // I cannot have two mutable borrows
 
             one_borrow.push(String::from(message));
