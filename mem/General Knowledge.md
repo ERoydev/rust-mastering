@@ -1,5 +1,7 @@
 # How Rust Binaries Work
 
+Resource used: https://www.youtube.com/watch?v=7_o-YRxf_cc&t=904s
+
 ### So in rust when i run either with cargo build or directly rust creates an executable file
 
 ## 1. Rust produces a native executable
