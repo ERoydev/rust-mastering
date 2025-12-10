@@ -16,7 +16,7 @@
 ## Video resources:
   - Crust of Rust: https://www.youtube.com/playlist?list=PLqbS7AVVErFiWDOAVrPt7aYmnuuOLYvOa
   - Good youtube channel: https://www.youtube.com/@jonhoo/videos
-  - Incredible Resource for Rust memory layour -> https://www.youtube.com/watch?v=7_o-YRxf_cc&t=904s
+  - Incredible resource for Rust memory layout -> https://www.youtube.com/watch?v=7_o-YRxf_cc&t=904s
 
 ## Just the course schedule:
   - https://training.trainsec.net/rust-programming-masterclass?gad_source=1&gad_campaignid=22122598319&gbraid=0AAAAA-FZ29r4aPlcmUZvUzgNEEBJjlsWB&gclid=Cj0KCQjw8cHABhC-ARIsAJnY12zbRk7rr2nYSicUsVbdAIltsuTw-Horu6hmfSiEgxqMaadW7nr9bWkaAtugEALw_wcB
