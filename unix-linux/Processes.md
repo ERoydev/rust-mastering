@@ -54,6 +54,9 @@ This command attempts to connect to port 8899 on localhost and reports if the co
 
 ### 4. You can use `tcpdump` to monito network traffic
 
+- Good resource: https://www.redhat.com/en/blog/introduction-using-tcpdump-linux-command-line
+
+
 With tcpdump, you can capture and inspect TCP packets on a specific port.
 
 ```bash
