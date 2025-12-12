@@ -18,6 +18,66 @@
 
    - Then click **Continue** to go to that file and inspect the execution.
 
+# Debugging the Fork with LLDB
+
+## 1. Build tests without running them
+
+This compiles the tests and produces an executable binary without executing it:
+
+
+In this example i compile a specific `crate` that i want to debug from a workspace
+
+```bash
+cargo test -p surfpool-core --no-run
+```
+
+## 2. Launch LLDB using the generated test binary
+
+Find the produced test executable under `target/debug/deps/` and start LLDB:
+
+```bash
+lldb target/debug/deps/surfpool_core-<some_hash>
+```
+
+## 3. Set a breakpoint on a specific file and line
+
+Use the absolute file path and the line number you want to break at:
+
+```bash
+breakpoint set --file /Users/emilemilovroydev/Rust/projects/Solana/gimlet-debugger/surfpool-fork/crates/core/src/surfnet/svm.rs --line 500
+```
+
+## 4. Run the test binary inside LLDB
+
+Start execution and LLDB will stop at your breakpoint:
+
+```bash
+run
+```
+
+## 5. If that work you can use CodeLLDB inside `.vscode/launch.json`.
+The `launch.json` file will look something like this
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug surfpool_core binary (test build)",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/target/debug/deps/surfpool_core-233e4c2f48bd8d26",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopOnEntry": false,
+            "preRunCommands": [
+                "breakpoint set --file ${workspaceFolder}/crates/core/src/surfnet/svm.rs --line 500"
+            ]
+        }
+    ]
+}
+```
+
 ---
 
 # Formatting
