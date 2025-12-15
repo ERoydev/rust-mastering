@@ -121,6 +121,28 @@ read line < /dev/stdin
 echo "You typed: $line"
 ```
 
+### Inspect File Descriptors with lsof
+
+You can use `lsof` command to inspect file descriptors for a running process, specifically focusing on checking where process's standart error (stderr) is directed.
+
+```
+lsof -p <PID> -a -d <FD>
+```
+
+- `-p <PID>`: Filter by process ID.
+- `-a`: Combine conditions (logical AND).
+- `-d <FD>`: Filter by file descriptor number (e.g., 2 for stderr).
+
+#### Example
+To check where stderr (file descriptor 2) of process 3206 is pointing:
+```
+lsof -p 3206 -a -d 2
+```
+This is useful for debugging, logging, or verifying where a process writes its error output (e.g., a file, terminal, or pipe).
+
+using `libc::dup2` on unsafe rust you can change that to point to somewhere else.
+
+
 ---
 
 ### Summary
