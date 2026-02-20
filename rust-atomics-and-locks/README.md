@@ -2,6 +2,11 @@
 
 This repository contains my code written while studying the "Rust Atomics and Locks" book. For each chapter, I include code snippets along with explanatory comments to illustrate key concepts and patterns.
 
+
+<p align="center">
+  <img src="https://mara.nl/atomics/cover.jpg" width="300" alt="Rust Atomics and Locks Cover">
+</p>
+
 ---
 
 ## Chapters
