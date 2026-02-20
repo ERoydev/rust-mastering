@@ -1,6 +1,6 @@
 # Rust Atomics and Locks Book by Mara Bos
 
-This repository contains my code written while studying the "Rust Atomics and Locks" book. For each chapter, I include code snippets along with explanatory comments to illustrate key concepts and patterns.
+This repository contains my code written while studying the "Rust Atomics and Locks" [BOOK](https://mara.nl/atomics/). For each chapter, I include code snippets along with explanatory comments to illustrate key concepts and patterns.
 
 
 <p align="center">
