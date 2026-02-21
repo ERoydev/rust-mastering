@@ -31,3 +31,8 @@ This repository contains my code written while studying the "Rust Atomics and Lo
     Combines previous chapters to create fully functional mutexes and condition variables.
 * **Chapter 10: Ideas and Inspiration**
     Discusses more advanced patterns, such as lock-free linked lists and RCU (Read-Copy-Update) patterns.
+
+
+Usefull Links:
+
+For Memory Ordering this explains it good -> [here](https://www.youtube.com/watch?v=373srjM3Sbw) at 16:00 min
