@@ -62,6 +62,7 @@ impl<T> Channel<T> {
 impl<T> Drop for Channel<T> {
     fn drop(&mut self) {
         if *self.ready.get_mut() {
+            // So here i need to specifically drop the message for MaybeUinint
             unsafe { self.message.get_mut().assume_init_drop() };
         }
     }
