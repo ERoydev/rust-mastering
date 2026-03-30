@@ -66,6 +66,6 @@ Tipically when i link the program, the linker automatically pulls in `crt0.o` (o
 
 
 # Resources
-[1] -> https://inferara.com/blog/c-runtime/
-[2] -> https://etherealwake.com/2021/09/crt-startup/
-[3] -> https://users.informatik.haw-hamburg.de/~krabat/FH-Labor/gnupro/7_GNUPro_Embedded_Development/embcrt0_the_main_startup_file.html
+- [1] -> https://inferara.com/blog/c-runtime/
+- [2] -> https://etherealwake.com/2021/09/crt-startup/
+- [3] -> https://users.informatik.haw-hamburg.de/~krabat/FH-Labor/gnupro/7_GNUPro_Embedded_Development/embcrt0_the_main_startup_file.html
