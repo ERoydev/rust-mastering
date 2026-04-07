@@ -1,0 +1,11 @@
+
+prog1:	file format mach-o arm64
+
+Disassembly of section __TEXT,__text:
+
+0000000100000328 <_main>:
+100000328: d10043ff    	sub	sp, sp, #0x10
+10000032c: 52800000    	mov	w0, #0x0                ; =0
+100000330: b9000fff    	str	wzr, [sp, #0xc]
+100000334: 910043ff    	add	sp, sp, #0x10
+100000338: d65f03c0    	ret
