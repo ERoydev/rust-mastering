@@ -56,6 +56,7 @@ impl<T> Arc<T> {
 
     // This is the same as the `compare_exchange`, its just a wrapper so i don't write the loop myself.
     // `update` and `try_update` are from rust 1.95 newer release
+    #[warn(unused)]
     pub fn increment_ref_counter_via_try_update(&self) {
         self.data()
             .ref_count
@@ -71,6 +72,14 @@ impl<T> Deref for Arc<T> {
     type Target = T;
 
     // Expose the inner T so Arc<T> can be used like &T.
+    //
+    // How auto-deref works in practice (e.g. `arc_data.name`):
+    //  1. `arc_data` is `Arc<ArcExperimentalData>`
+    //  2. You write `arc_data.name`
+    //  3. Compiler checks: does `Arc<ArcExperimentalData>` have a field `name`? No.
+    //  4. Compiler checks: does `Arc<ArcExperimentalData>` implement `Deref`? Yes.
+    //  5. Compiler calls `deref()`, which returns `&ArcExperimentalData`
+    //  6. Compiler checks: does `ArcExperimentalData` have a field `name`? Yes. Done.
     fn deref(&self) -> &T {
         &self.data().data
     }
@@ -86,15 +95,13 @@ impl<T> Clone for Arc<T> {
 
 impl<T> Drop for Arc<T> {
     fn drop(&mut self) {
-        let prev_val = self.data().ref_count.fetch_sub(1, Ordering::Release);
-
-        if prev_val == 1 {
+        if self.data().ref_count.fetch_sub(1, Ordering::Release) == 1 {
             fence(Ordering::Acquire); // helps me catch the memory ordering
             // When i want to deallocate data from raw-pointer that is leaked i need to establish ownership from raw-pointer
 
             // Box::from_raw is the standard safe way to reclaim ownership from raw pointer, when it goes out of scope it triggers the destructor
             drop(unsafe { Box::from_raw(self.ptr.as_ptr()) })
-        }
+        };
     }
 }
 
@@ -134,13 +141,12 @@ mod tests {
         println!();
 
         let arc_data = setup();
-        println!("Arc data is holding a raw pointer: {:?}", arc_data);
-
-        println!(
-            "Dereference the raw pointer via `.as_ref()` and return a shared reference to the data behind the pointer {:?}",
-            arc_data.data()
+        assert_eq!(
+            arc_data.name,
+            "Daka".to_string(),
+            "Name should be initialized to Daka"
         );
-
+        assert_eq!(arc_data.age, 25, "Age should be initialied to 25");
         println!();
     }
 
@@ -212,5 +218,133 @@ mod tests {
             1,
             "Inner data must be dropped exactly once on the last Arc drop"
         );
+    }
+
+    #[test]
+    fn book_written_test() {
+        static NUM_DROPS: AtomicUsize = AtomicUsize::new(0);
+
+        struct DetectDrop;
+
+        impl Drop for DetectDrop {
+            fn drop(&mut self) {
+                NUM_DROPS.fetch_add(1, Ordering::Relaxed);
+            }
+        }
+
+        // Create two Arcs sharing an object containing a string
+        // and a DetectDrop, to detect when it's dropped.
+        let x = Arc::new(("hello", DetectDrop));
+        let y = x.clone();
+
+        // Send x to another thread, and use it there.
+        let t = std::thread::spawn(move || {
+            assert_eq!(x.0, "hello");
+        });
+
+        // In parallel, y should still be usable here.
+        assert_eq!(y.0, "hello");
+
+        // Wait for the thread to finish.
+        t.join().unwrap();
+
+        // One Arc, x, should be dropped by now.
+        // We still have y, so the object shouldn't have been dropped yet.
+        assert_eq!(NUM_DROPS.load(Ordering::Relaxed), 0);
+
+        // Drop the remaining `Arc`.
+        drop(y);
+
+        // Now that `y` is dropped too,
+        // the object should've been dropped.
+        assert_eq!(NUM_DROPS.load(Ordering::Relaxed), 1);
+    }
+
+    // Run with:
+    // MIRIFLAGS="-Zmiri-backtrace=full" cargo +nightly miri test miri_stress_clone_drop -- --nocapture
+    #[test]
+    #[cfg(miri)]
+    fn miri_stress_clone_drop() {
+        static NUM_DROPS: AtomicUsize = AtomicUsize::new(0);
+
+        struct DetectDrop;
+
+        impl Drop for DetectDrop {
+            fn drop(&mut self) {
+                NUM_DROPS.fetch_add(1, Ordering::Relaxed);
+            }
+        }
+
+        println!("miri_stress_clone_drop: starting");
+
+        for i in 0..500 {
+            NUM_DROPS.store(0, Ordering::Relaxed);
+
+            let a = Arc::new((42usize, DetectDrop));
+            let b = a.clone();
+
+            let t = std::thread::spawn(move || {
+                assert_eq!(a.0, 42);
+            });
+
+            assert_eq!(b.0, 42);
+            t.join().unwrap();
+
+            assert_eq!(NUM_DROPS.load(Ordering::Relaxed), 0);
+            drop(b);
+            assert_eq!(NUM_DROPS.load(Ordering::Relaxed), 1);
+
+            if i % 100 == 0 {
+                println!("miri_stress_clone_drop: iteration {}", i);
+            }
+        }
+
+        println!("miri_stress_clone_drop: done");
+    }
+
+    // Run with different schedules:
+    // for s in 1 2 3 4 5; do MIRIFLAGS="-Zmiri-seed=$s -Zmiri-backtrace=full" cargo +nightly miri test miri_stress_parallel_clones -- --exact || break; done
+    #[test]
+    #[cfg(miri)]
+    fn miri_stress_parallel_clones() {
+        static NUM_DROPS: AtomicUsize = AtomicUsize::new(0);
+
+        struct DetectDrop;
+
+        impl Drop for DetectDrop {
+            fn drop(&mut self) {
+                NUM_DROPS.fetch_add(1, Ordering::Relaxed);
+            }
+        }
+
+        println!("miri_stress_parallel_clones: starting");
+
+        for i in 0..200 {
+            NUM_DROPS.store(0, Ordering::Relaxed);
+
+            let base = Arc::new(("hello", DetectDrop));
+            let mut handles = Vec::new();
+
+            for _ in 0..4 {
+                let c = base.clone();
+                handles.push(std::thread::spawn(move || {
+                    assert_eq!(c.0, "hello");
+                }));
+            }
+
+            for handle in handles {
+                handle.join().unwrap();
+            }
+
+            assert_eq!(NUM_DROPS.load(Ordering::Relaxed), 0);
+            drop(base);
+            assert_eq!(NUM_DROPS.load(Ordering::Relaxed), 1);
+
+            if i % 50 == 0 {
+                println!("miri_stress_parallel_clones: iteration {}", i);
+            }
+        }
+
+        println!("miri_stress_parallel_clones: done");
     }
 }

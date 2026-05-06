@@ -1,10 +1,7 @@
 mod basic_ref_counting;
 
-pub struct ArcExperiment {
-    name: String,
-    age: u8,
-}
-
 fn main() {
-    println!("Hello, world!");
+    println!("Hello, world! From Building own Arc");
+    // cargo test -- --nocapture
+    // cargo +nightly miri test -> to run it with miri
 }
