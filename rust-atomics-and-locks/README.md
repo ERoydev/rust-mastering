@@ -34,6 +34,5 @@ This repository contains my code written while studying the "Rust Atomics and Lo
 
 
 Usefull Links:
-
-For Memory Ordering this explains it good -> [here](https://www.youtube.com/watch?v=373srjM3Sbw) at 16:00 min
-Mara-Bos examples from book -> https://github.com/m-ou-se/rust-atomics-and-locks/tree/main
+- For Memory Ordering this explains it good -> [here](https://www.youtube.com/watch?v=373srjM3Sbw) at 16:00 min
+- Mara-Bos examples from book -> https://github.com/m-ou-se/rust-atomics-and-locks/tree/main
