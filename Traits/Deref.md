@@ -1,6 +1,6 @@
-# Deref trait implementation                                                                                                                                                                                                          
-                                                                  
-  Resource: https://oneuptime.com/blog/post/2026-01-25-auto-dereferencing-rules-rust/view                                                                                                                                               
+# Deref trait implementation                                                                                                                                                             
+- Resource: https://oneuptime.com/blog/post/2026-01-25-auto-dereferencing-rules-rust/view
+- At the rust-atomics-and-locks i have good real world example -> [here](https://github.com/ERoydev/rust-mastering/blob/main/rust-atomics-and-locks/building-own-arc/src/basic_ref_counting.rs#L75-L90)
    
   ## Auto-deref                                                                                                                                                                                                                         
                                                                   
