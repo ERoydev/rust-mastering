@@ -5,24 +5,27 @@ use std::sync::atomic::Ordering;
 use std::sync::atomic::fence;
 
 #[derive(Debug)]
+#[allow(dead_code)]
 struct ArcData<T> {
     ref_count: AtomicUsize,
     data: T,
 }
 
 #[derive(Debug)]
+#[allow(dead_code)]
 pub struct Arc<T> {
     // represents a pointer to T that is never null.
     ptr: NonNull<ArcData<T>>,
 }
 
 impl<T> Arc<T> {
+    #[allow(dead_code)]
     pub fn new(data: T) -> Arc<T> {
         Arc {
             // Box::leak() consumes Box, prevents its destructor, leave the allocation alive for the rest of the program
-            //  and retunrs a static mutable ref to that data
+            //  and returns a static mutable ref to that data
             //  LINK - https://softwaremill.com/leaking-memory-on-purpose-in-rust/
-            // Then i convert the leaked mutable reference to a NonNull<T> (non-null raw pointer), guaranteed to never be null
+            // Then I convert the leaked mutable reference to a NonNull<T> (non-null raw pointer), guaranteed to never be null
             ptr: NonNull::from(Box::leak(Box::new(ArcData {
                 ref_count: AtomicUsize::new(1),
                 data,
@@ -35,11 +38,12 @@ impl<T> Arc<T> {
         unsafe { self.ptr.as_ref() }
     }
 
-    // Bellow i have the same functionality but using `try_update()` to avoid this loop myself
+    // Bellow I have the same functionality but using `try_update()` to avoid this loop myself
+    #[allow(dead_code)]
     pub fn increment_ref_counter_using_compare_exchange_weak(&self) {
         let mut ref_counter = self.data().ref_count.load(Ordering::Relaxed);
         loop {
-            if ref_counter >= usize::MAX {
+            if ref_counter == usize::MAX {
                 std::process::abort()
             }
             match self.data().ref_count.compare_exchange_weak(
@@ -61,7 +65,7 @@ impl<T> Arc<T> {
         self.data()
             .ref_count
             .try_update(Ordering::Relaxed, Ordering::Relaxed, |x| {
-                if x >= usize::MAX { None } else { Some(x + 1) }
+                if x == usize::MAX { None } else { Some(x + 1) }
             })
             .expect("ref counter overflow");
     }
@@ -85,7 +89,7 @@ impl<T> Deref for Arc<T> {
     }
 }
 
-// On clone i should just increment the counter there is no "real" Clone of the ArcData
+// On .clone I should just increment the counter there is no "real" Clone of the ArcData
 impl<T> Clone for Arc<T> {
     fn clone(&self) -> Self {
         self.increment_ref_counter_via_try_update();
@@ -97,7 +101,7 @@ impl<T> Drop for Arc<T> {
     fn drop(&mut self) {
         if self.data().ref_count.fetch_sub(1, Ordering::Release) == 1 {
             fence(Ordering::Acquire); // helps me catch the memory ordering
-            // When i want to deallocate data from raw-pointer that is leaked i need to establish ownership from raw-pointer
+            // When I want to deallocate data from raw-pointer that is leaked I need to establish ownership from raw-pointer
 
             // Box::from_raw is the standard safe way to reclaim ownership from raw pointer, when it goes out of scope it triggers the destructor
             drop(unsafe { Box::from_raw(self.ptr.as_ptr()) })
@@ -178,6 +182,7 @@ mod tests {
         assert_eq!(arc_data.age, 25);
 
         // Same result with explicit deref syntax.
+
         assert_eq!((*arc_data).age, 25);
     }
 
