@@ -1,4 +1,4 @@
-use std::ops::Deref;
+use std::ops::{Deref, DerefMut};
 use std::ptr::NonNull;
 use std::sync::atomic::AtomicUsize;
 use std::sync::atomic::Ordering;
@@ -36,6 +36,20 @@ impl<T> Arc<T> {
     // returns a shared-reference (private method)
     fn data(&self) -> &ArcData<T> {
         unsafe { self.ptr.as_ref() }
+    }
+
+    // returns mutable-reference
+    fn get_mut(arc: &mut Self) -> Option<&mut T> {
+        // Taking &mut Self is ensuring I can borrow a value mutably only once. So i cannot try to borrow as mutable more than once.
+        if arc.data().ref_count.load(Ordering::Relaxed) == 1 {
+            fence(Ordering::Acquire);
+            // Safety: Nothing else can access the data, since there's only one Arc,
+            // to which we have exclusive access.
+            unsafe { Some(&mut arc.ptr.as_mut().data) }
+        } else {
+            None
+        }
+        // The returned mutable ref borrows the lifetime from the arg, meaning nothing can use the original Arc as long as the returned (&mut T is still around), allowing for safe mutation.
     }
 
     // Bellow I have the same functionality but using `try_update()` to avoid this loop myself

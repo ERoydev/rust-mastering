@@ -1,0 +1,464 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+// HINT: See also -Z dump-mir for MIR at specific points during compilation.
+fn basic_ref_counting::<impl at src/basic_ref_counting.rs:7:10: 7:15>::fmt(_1: &ArcData<T>, _2: &mut Formatter<'_>) -> Result<(), std::fmt::Error> {
+    debug self => _1;
+    debug f => _2;
+    let mut _0: std::result::Result<(), std::fmt::Error>;
+    let mut _3: &str;
+    let mut _4: &str;
+    let mut _5: &dyn std::fmt::Debug;
+    let _6: &std::sync::atomic::Atomic<usize>;
+    let mut _7: &str;
+    let mut _8: &dyn std::fmt::Debug;
+    let _9: &&T;
+    let _10: &T;
+
+    bb0: {
+        _3 = const "ArcData";
+        _4 = const "ref_count";
+        _6 = &((*_1).0: std::sync::atomic::Atomic<usize>);
+        _5 = copy _6 as &dyn std::fmt::Debug (PointerCoercion(Unsize, Implicit));
+        _7 = const "data";
+        _10 = &((*_1).1: T);
+        _9 = &_10;
+        _8 = copy _9 as &dyn std::fmt::Debug (PointerCoercion(Unsize, Implicit));
+        _0 = Formatter::<'_>::debug_struct_field2_finish(copy _2, move _3, move _4, move _5, move _7, move _8) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        return;
+    }
+}
+
+alloc3 (size: 4, align: 1) {
+    64 61 74 61                                     │ data
+}
+
+alloc2 (size: 9, align: 1) {
+    72 65 66 5f 63 6f 75 6e 74                      │ ref_count
+}
+
+alloc1 (size: 7, align: 1) {
+    41 72 63 44 61 74 61                            │ ArcData
+}
+
+fn basic_ref_counting::<impl at src/basic_ref_counting.rs:14:10: 14:15>::fmt(_1: &basic_ref_counting::Arc<T>, _2: &mut Formatter<'_>) -> Result<(), std::fmt::Error> {
+    debug self => _1;
+    debug f => _2;
+    let mut _0: std::result::Result<(), std::fmt::Error>;
+    let mut _3: &str;
+    let mut _4: &str;
+    let mut _5: &dyn std::fmt::Debug;
+    let _6: &&std::ptr::NonNull<basic_ref_counting::ArcData<T>>;
+    let _7: &std::ptr::NonNull<basic_ref_counting::ArcData<T>>;
+
+    bb0: {
+        _3 = const "Arc";
+        _4 = const "ptr";
+        _7 = &((*_1).0: std::ptr::NonNull<basic_ref_counting::ArcData<T>>);
+        _6 = &_7;
+        _5 = copy _6 as &dyn std::fmt::Debug (PointerCoercion(Unsize, Implicit));
+        _0 = Formatter::<'_>::debug_struct_field1_finish(copy _2, move _3, move _4, move _5) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        return;
+    }
+}
+
+alloc5 (size: 3, align: 1) {
+    70 74 72                                        │ ptr
+}
+
+alloc4 (size: 3, align: 1) {
+    41 72 63                                        │ Arc
+}
+
+fn basic_ref_counting::<impl at src/basic_ref_counting.rs:21:1: 21:15>::new(_1: T) -> basic_ref_counting::Arc<T> {
+    debug data => _1;
+    let mut _0: basic_ref_counting::Arc<T>;
+    let mut _2: std::ptr::NonNull<basic_ref_counting::ArcData<T>>;
+    let mut _3: &mut basic_ref_counting::ArcData<T>;
+    let mut _4: std::boxed::Box<basic_ref_counting::ArcData<T>>;
+    let mut _5: basic_ref_counting::ArcData<T>;
+    let mut _6: std::sync::atomic::Atomic<usize>;
+    let mut _7: T;
+    let mut _8: bool;
+
+    bb0: {
+        _8 = const false;
+        _8 = const true;
+        _6 = Atomic::<usize>::new(const 1_usize) -> [return: bb1, unwind: bb7];
+    }
+
+    bb1: {
+        _8 = const false;
+        _7 = move _1;
+        _5 = ArcData::<T> { ref_count: move _6, data: move _7 };
+        _4 = Box::<ArcData<T>>::new(move _5) -> [return: bb2, unwind: bb7];
+    }
+
+    bb2: {
+        _3 = Box::<ArcData<T>>::leak::<'_>(move _4) -> [return: bb3, unwind: bb7];
+    }
+
+    bb3: {
+        _2 = <NonNull<ArcData<T>> as From<&mut ArcData<T>>>::from(move _3) -> [return: bb4, unwind: bb7];
+    }
+
+    bb4: {
+        _0 = basic_ref_counting::Arc::<T> { ptr: move _2 };
+        return;
+    }
+
+    bb5 (cleanup): {
+        resume;
+    }
+
+    bb6 (cleanup): {
+        drop(_1) -> [return: bb5, unwind terminate(cleanup)];
+    }
+
+    bb7 (cleanup): {
+        switchInt(copy _8) -> [0: bb5, otherwise: bb6];
+    }
+}
+
+fn basic_ref_counting::<impl at src/basic_ref_counting.rs:21:1: 21:15>::data(_1: &basic_ref_counting::Arc<T>) -> &ArcData<T> {
+    debug self => _1;
+    let mut _0: &basic_ref_counting::ArcData<T>;
+    let mut _2: &std::ptr::NonNull<basic_ref_counting::ArcData<T>>;
+
+    bb0: {
+        _2 = &((*_1).0: std::ptr::NonNull<basic_ref_counting::ArcData<T>>);
+        _0 = NonNull::<ArcData<T>>::as_ref::<'_>(move _2) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        return;
+    }
+}
+
+fn basic_ref_counting::<impl at src/basic_ref_counting.rs:21:1: 21:15>::get_mut(_1: &mut basic_ref_counting::Arc<T>) -> Option<&mut ArcData<T>> {
+    debug arc => _1;
+    let mut _0: std::option::Option<&mut basic_ref_counting::ArcData<T>>;
+    let mut _2: bool;
+    let mut _3: usize;
+    let mut _4: &std::sync::atomic::Atomic<usize>;
+    let _5: &basic_ref_counting::ArcData<T>;
+    let mut _6: &basic_ref_counting::Arc<T>;
+    let mut _7: std::sync::atomic::Ordering;
+    let _8: ();
+    let mut _9: std::sync::atomic::Ordering;
+    let mut _10: &mut basic_ref_counting::ArcData<T>;
+    let mut _11: &mut std::ptr::NonNull<basic_ref_counting::ArcData<T>>;
+
+    bb0: {
+        _6 = &(*_1);
+        _5 = basic_ref_counting::Arc::<T>::data(move _6) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _4 = &((*_5).0: std::sync::atomic::Atomic<usize>);
+        _7 = std::sync::atomic::Ordering::Relaxed;
+        _3 = Atomic::<usize>::load(move _4, move _7) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        _2 = Eq(move _3, const 1_usize);
+        switchInt(move _2) -> [0: bb6, otherwise: bb3];
+    }
+
+    bb3: {
+        _9 = std::sync::atomic::Ordering::Acquire;
+        _8 = fence(move _9) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        _11 = &mut ((*_1).0: std::ptr::NonNull<basic_ref_counting::ArcData<T>>);
+        _10 = NonNull::<ArcData<T>>::as_mut::<'_>(move _11) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        _0 = Option::<&mut ArcData<T>>::Some(copy _10);
+        goto -> bb7;
+    }
+
+    bb6: {
+        _0 = Option::<&mut ArcData<T>>::None;
+        goto -> bb7;
+    }
+
+    bb7: {
+        return;
+    }
+}
+
+fn basic_ref_counting::<impl at src/basic_ref_counting.rs:21:1: 21:15>::increment_ref_counter_using_compare_exchange_weak(_1: &basic_ref_counting::Arc<T>) -> () {
+    debug self => _1;
+    let mut _0: ();
+    let mut _2: usize;
+    let mut _3: &std::sync::atomic::Atomic<usize>;
+    let _4: &basic_ref_counting::ArcData<T>;
+    let mut _5: std::sync::atomic::Ordering;
+    let mut _6: bool;
+    let mut _7: usize;
+    let mut _8: !;
+    let mut _9: std::result::Result<usize, usize>;
+    let mut _10: &std::sync::atomic::Atomic<usize>;
+    let _11: &basic_ref_counting::ArcData<T>;
+    let mut _12: usize;
+    let mut _13: usize;
+    let mut _14: usize;
+    let mut _15: (usize, bool);
+    let mut _16: std::sync::atomic::Ordering;
+    let mut _17: std::sync::atomic::Ordering;
+    let mut _18: isize;
+    scope 1 {
+        debug ref_counter => _2;
+        let _19: usize;
+        scope 2 {
+            debug current => _19;
+        }
+    }
+
+    bb0: {
+        _4 = basic_ref_counting::Arc::<T>::data(copy _1) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _3 = &((*_4).0: std::sync::atomic::Atomic<usize>);
+        _5 = std::sync::atomic::Ordering::Relaxed;
+        _2 = Atomic::<usize>::load(move _3, move _5) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        _7 = copy _2;
+        _6 = Eq(move _7, const core::num::<impl usize>::MAX);
+        switchInt(move _6) -> [0: bb4, otherwise: bb3];
+    }
+
+    bb3: {
+        _8 = std::process::abort() -> unwind continue;
+    }
+
+    bb4: {
+        _11 = basic_ref_counting::Arc::<T>::data(copy _1) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        _10 = &((*_11).0: std::sync::atomic::Atomic<usize>);
+        _12 = copy _2;
+        _14 = copy _2;
+        _15 = AddWithOverflow(copy _14, const 1_usize);
+        assert(!move (_15.1: bool), "attempt to compute `{} + {}`, which would overflow", move _14, const 1_usize) -> [success: bb6, unwind continue];
+    }
+
+    bb6: {
+        _13 = move (_15.0: usize);
+        _16 = std::sync::atomic::Ordering::Relaxed;
+        _17 = std::sync::atomic::Ordering::Relaxed;
+        _9 = Atomic::<usize>::compare_exchange_weak(move _10, move _12, move _13, move _16, move _17) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        _18 = discriminant(_9);
+        switchInt(move _18) -> [0: bb10, 1: bb9, otherwise: bb8];
+    }
+
+    bb8: {
+        unreachable;
+    }
+
+    bb9: {
+        _19 = copy ((_9 as Err).0: usize);
+        _2 = copy _19;
+        goto -> bb2;
+    }
+
+    bb10: {
+        return;
+    }
+}
+
+fn basic_ref_counting::<impl at src/basic_ref_counting.rs:21:1: 21:15>::increment_ref_counter_via_try_update(_1: &basic_ref_counting::Arc<T>) -> () {
+    debug self => _1;
+    let mut _0: ();
+    let _2: usize;
+    let mut _3: std::result::Result<usize, usize>;
+    let mut _4: &std::sync::atomic::Atomic<usize>;
+    let _5: &basic_ref_counting::ArcData<T>;
+    let mut _6: std::sync::atomic::Ordering;
+    let mut _7: std::sync::atomic::Ordering;
+    let mut _8: &str;
+
+    bb0: {
+        _5 = basic_ref_counting::Arc::<T>::data(copy _1) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _4 = &((*_5).0: std::sync::atomic::Atomic<usize>);
+        _6 = std::sync::atomic::Ordering::Relaxed;
+        _7 = std::sync::atomic::Ordering::Relaxed;
+        _3 = Atomic::<usize>::try_update::<{closure@src/basic_ref_counting.rs:79:63: 79:66}>(move _4, move _6, move _7, const ZeroSized: {closure@src/basic_ref_counting.rs:79:63: 79:66}) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        _8 = const "ref counter overflow";
+        _2 = Result::<usize, usize>::expect(move _3, move _8) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        return;
+    }
+}
+
+alloc7 (size: 20, align: 1) {
+    0x00 │ 72 65 66 20 63 6f 75 6e 74 65 72 20 6f 76 65 72 │ ref counter over
+    0x10 │ 66 6c 6f 77                                     │ flow
+}
+
+fn basic_ref_counting::<impl at src/basic_ref_counting.rs:21:1: 21:15>::increment_ref_counter_via_try_update::{closure#0}(_1: &mut {closure@src/basic_ref_counting.rs:79:63: 79:66}, _2: usize) -> Option<usize> {
+    debug x => _2;
+    let mut _0: std::option::Option<usize>;
+    let mut _3: bool;
+    let mut _4: usize;
+    let mut _5: (usize, bool);
+
+    bb0: {
+        _3 = Eq(copy _2, const core::num::<impl usize>::MAX);
+        switchInt(move _3) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        _0 = Option::<usize>::None;
+        goto -> bb4;
+    }
+
+    bb2: {
+        _5 = AddWithOverflow(copy _2, const 1_usize);
+        assert(!move (_5.1: bool), "attempt to compute `{} + {}`, which would overflow", copy _2, const 1_usize) -> [success: bb3, unwind continue];
+    }
+
+    bb3: {
+        _4 = move (_5.0: usize);
+        _0 = Option::<usize>::Some(move _4);
+        goto -> bb4;
+    }
+
+    bb4: {
+        return;
+    }
+}
+
+fn basic_ref_counting::<impl at src/basic_ref_counting.rs:87:1: 87:25>::deref(_1: &basic_ref_counting::Arc<T>) -> &T {
+    debug self => _1;
+    let mut _0: &T;
+    let _2: &basic_ref_counting::ArcData<T>;
+
+    bb0: {
+        _2 = basic_ref_counting::Arc::<T>::data(copy _1) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _0 = &((*_2).1: T);
+        return;
+    }
+}
+
+fn basic_ref_counting::<impl at src/basic_ref_counting.rs:105:1: 105:25>::clone(_1: &basic_ref_counting::Arc<T>) -> basic_ref_counting::Arc<T> {
+    debug self => _1;
+    let mut _0: basic_ref_counting::Arc<T>;
+    let _2: ();
+    let mut _3: std::ptr::NonNull<basic_ref_counting::ArcData<T>>;
+
+    bb0: {
+        _2 = basic_ref_counting::Arc::<T>::increment_ref_counter_via_try_update(copy _1) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _3 = copy ((*_1).0: std::ptr::NonNull<basic_ref_counting::ArcData<T>>);
+        _0 = basic_ref_counting::Arc::<T> { ptr: move _3 };
+        return;
+    }
+}
+
+fn basic_ref_counting::<impl at src/basic_ref_counting.rs:112:1: 112:24>::drop(_1: &mut basic_ref_counting::Arc<T>) -> () {
+    debug self => _1;
+    let mut _0: ();
+    let _2: ();
+    let mut _3: bool;
+    let mut _4: usize;
+    let mut _5: &std::sync::atomic::Atomic<usize>;
+    let _6: &basic_ref_counting::ArcData<T>;
+    let mut _7: &basic_ref_counting::Arc<T>;
+    let mut _8: std::sync::atomic::Ordering;
+    let _9: ();
+    let mut _10: std::sync::atomic::Ordering;
+    let mut _11: std::boxed::Box<basic_ref_counting::ArcData<T>>;
+    let mut _12: *mut basic_ref_counting::ArcData<T>;
+    let mut _13: std::ptr::NonNull<basic_ref_counting::ArcData<T>>;
+
+    bb0: {
+        _7 = &(*_1);
+        _6 = basic_ref_counting::Arc::<T>::data(move _7) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _5 = &((*_6).0: std::sync::atomic::Atomic<usize>);
+        _8 = std::sync::atomic::Ordering::Release;
+        _4 = Atomic::<usize>::fetch_sub(move _5, const 1_usize, move _8) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        _3 = Eq(move _4, const 1_usize);
+        switchInt(move _3) -> [0: bb7, otherwise: bb3];
+    }
+
+    bb3: {
+        _10 = std::sync::atomic::Ordering::Acquire;
+        _9 = fence(move _10) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        _13 = copy ((*_1).0: std::ptr::NonNull<basic_ref_counting::ArcData<T>>);
+        _12 = NonNull::<ArcData<T>>::as_ptr(move _13) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        _11 = Box::<ArcData<T>>::from_raw(move _12) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        _2 = std::mem::drop::<Box<ArcData<T>>>(move _11) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        return;
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();
+    let _1: ();
+    let mut _2: std::fmt::Arguments<'_>;
+
+    bb0: {
+        _2 = Arguments::<'_>::from_str(const "Hello, world! From Building own Arc\n") -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _1 = std::io::_print(move _2) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        return;
+    }
+}
+
+alloc8 (size: 36, align: 1) {
+    0x00 │ 48 65 6c 6c 6f 2c 20 77 6f 72 6c 64 21 20 46 72 │ Hello, world! Fr
+    0x10 │ 6f 6d 20 42 75 69 6c 64 69 6e 67 20 6f 77 6e 20 │ om Building own 
+    0x20 │ 41 72 63 0a                                     │ Arc.
+}
