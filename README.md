@@ -18,6 +18,22 @@
   - Good youtube channel: https://www.youtube.com/@jonhoo/videos
   - Incredible resource for Rust memory layout -> https://www.youtube.com/watch?v=7_o-YRxf_cc&t=904s
 
+## Compiler internals
+1. Minimal roadmap should be:
+  - [Compiler Overview](https://rustc-dev-guide.rust-lang.org/overview.html?utm_source=chatgpt.com)
+  - [Lexing & Parsing](https://rustc-dev-guide.rust-lang.org/the-parser.html?utm_source=chatgpt.com) 
+  - [AST → HIR Lowering](https://rustc-dev-guide.rust-lang.org/hir/lowering.html?utm_source=chatgpt.com) 
+  - [HIR Guide](https://rustc-dev-guide.rust-lang.org/hir.html?utm_source=chatgpt.com)
+  - [MIR Guide](https://rustc-dev-guide.rust-lang.org/mir/index.html?utm_source=chatgpt.com)
+  - [Borrow Checker](https://rustc-dev-guide.rust-lang.org/borrow-check.html)
+  - [Monomorphization](https://rustc-dev-guide.rust-lang.org/backend/monomorph.html?utm_source=chatgpt.com)
+  - [MIR → LLVM IR](https://rustc-dev-guide.rust-lang.org/backend/lowering-mir.html?utm_source=chatgpt.com)
+
+2. Only focus deeply on:
+  - HIR
+  - MIR
+  - Borrow Checker
+
 ## Just the course schedule:
   - https://training.trainsec.net/rust-programming-masterclass?gad_source=1&gad_campaignid=22122598319&gbraid=0AAAAA-FZ29r4aPlcmUZvUzgNEEBJjlsWB&gclid=Cj0KCQjw8cHABhC-ARIsAJnY12zbRk7rr2nYSicUsVbdAIltsuTw-Horu6hmfSiEgxqMaadW7nr9bWkaAtugEALw_wcB
 
