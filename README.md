@@ -6,6 +6,7 @@
   - Original Rust Book: https://doc.rust-lang.org/reference/
   - Paper Book: https://www.manning.com/books/write-powerful-rust-macros
   - Rust Toolchain: https://rust-lang.github.io/rustup/overrides.html
+  - Best practical Resource for Advanced Rustoceans - https://github.com/microsoft/RustTraining/tree/main
 
 ## Suggested resources by Boris:
 - https://www.oreilly.com/library/view/programming-rust-2nd/9781492052586/ -> good to read
