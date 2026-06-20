@@ -1,5 +1,6 @@
 mod basic_ref_counting;
 mod weak;
+mod optimizing;
 
 fn main() {
     println!("Hello, world! From Building own Arc");
