@@ -60,7 +60,7 @@ pub mod tests {
     use std::pin::Pin;
     use std::task::{Context, Poll, RawWaker, RawWakerVTable, Waker};
 
-    use crate::chap_2_future_trait::CountdownFuture;
+    use crate::cp_2_future_trait::CountdownFuture;
 
     /*
     Generally to implement a Waker we use `RawWaker` + `vtable` machinery and this is liek a contract between my future and the executor used.
