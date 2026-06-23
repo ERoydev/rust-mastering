@@ -4,7 +4,6 @@ use std::sync::atomic::AtomicBool;
 use std::task::{Context, Poll, RawWaker, RawWakerVTable, Waker};
 use std::pin::Pin;
 use std::sync::atomic::Ordering;
-use std::time::Duration;
 
 /// The simplest possible executor: busy-loop poll until Ready, cp_2 in test i have same stuff like this
 fn block_on<F: Future>(mut future: F) -> F::Output {
