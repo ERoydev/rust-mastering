@@ -13,6 +13,8 @@ You manually create partitions like:
 
 Each partition has a **fixed size** set during installation.
 
+- Without separate partitions, everything is stored in `/`, but splitting them provides better control, isolation, and system stability.
+
 ### Key characteristics
 - Fixed sizes
 - Directly tied to disk space
