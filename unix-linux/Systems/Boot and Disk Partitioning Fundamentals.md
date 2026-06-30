@@ -1,5 +1,7 @@
 # Boot and Disk Partitioning Fundamentals
 
+Quick Refresher [here](https://www.youtube.com/watch?v=XpFsMB6FoOs)
+
 ## Bios
 Bios is something that starts working immediately after i click the power button on my computer. Basically it initializes all the hardware and checks for errors. After that the bios gives the control to the OS. The bios is something that is attached as a memory chip to the motherboard, so it acts like a firmware.
 
